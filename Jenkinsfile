@@ -24,21 +24,14 @@ pipeline{
                 sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
                 sh 'docker tag my-app $DOCKER_USERNAME/$DOCKER_IMAGE:latest'
                 sh 'docker push $DOCKER_USERNAME/$DOCKER_IMAGE:latest'
-                sh 'docker pull $DOCKER_USERNAME/$DOCKER_IMAGE:latest'
+                
             }
         }
     }
-    stage('Deploy to Remote Server') {
+    stage('Deploy to Remote Server1111') {
         steps {
             script {
-                // Conectarse al servidor remoto mediante SSH
-                sh """
-                sh 'docker pull lnavarrete14/img-demo:latest'
-                sh 'docker ps -q -f name=${DOCKER_CONTAINER} | grep -q . && docker rm -f ${DOCKER_CONTAINER} || echo "No container running"'
-                
-                // Iniciar el contenedor con la nueva imagen
-                sh 'docker run -d --restart always --name ${DOCKER_CONTAINER} -p 7000:7000 $DOCKER_USERNAME/$DOCKER_IMAGE:latest'
-                """
+                sh 'docker pull $DOCKER_USERNAME/$DOCKER_IMAGE:latest'
             }
         }
     }

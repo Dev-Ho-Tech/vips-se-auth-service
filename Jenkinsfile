@@ -36,5 +36,26 @@ pipeline{
             }
         }
     }
+    stage('Clean Up') {
+        steps {
+            script {
+                // Limpiar imágenes no utilizadas para evitar que el espacio se llene
+                sh 'docker system prune -f --volumes'
+            }
+        }
+    }
+  }
+  post {
+        always {
+            // Enviar notificación al finalizar
+            echo "Pipeline finished"
+        }
+        success {
+            echo "Deployment successful!"
+        }
+        failure {
+            echo "Deployment failed!"
+            // Puedes agregar un paso para notificar a Slack o correo aquí.
+        }
   }
 }

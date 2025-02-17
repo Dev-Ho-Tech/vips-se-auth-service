@@ -24,6 +24,7 @@ pipeline{
                 sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
                 sh 'docker tag my-app $DOCKER_USERNAME/$DOCKER_IMAGE:latest'
                 sh 'docker push $DOCKER_USERNAME/$DOCKER_IMAGE:latest'
+                sh 'docker pull $DOCKER_USERNAME/$DOCKER_IMAGE:latest'
             }
         }
     }

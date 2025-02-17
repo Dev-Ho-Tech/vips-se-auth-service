@@ -32,12 +32,9 @@ pipeline{
             script {
                 // Conectarse al servidor remoto mediante SSH
                 sh """
-                // ssh -i ${SSH_KEY} ${REMOTE_SERVER} 'docker pull $DOCKER_USERNAME/my-app:latest && \
-                // docker stop my-app-container || true && \
-                // docker rm my-app-container || true && \
                 sh 'docker pull $DOCKER_USERNAME/$DOCKER_IMAGE:latest'
                 sh 'docker ps -q -f name=${DOCKER_CONTAINER} | grep -q . && docker rm -f ${DOCKER_CONTAINER} || echo "No container running"'
-                // docker run -d --name my-app-container -p 8080:8080 $DOCKER_USERNAME/$DOCKER_IMAGE:latest'
+                
                 // Iniciar el contenedor con la nueva imagen
                 sh 'docker run -d --restart always --name ${DOCKER_CONTAINER} -p 7000:7000 $DOCKER_USERNAME/$DOCKER_IMAGE:latest'
                 """

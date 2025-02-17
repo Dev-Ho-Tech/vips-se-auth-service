@@ -33,6 +33,7 @@ pipeline{
             script {
                 sh 'docker pull $DOCKER_USERNAME/$DOCKER_IMAGE:latest'
                 sh 'docker ps -q -f name=${DOCKER_CONTAINER} | grep -q . && docker rm -f ${DOCKER_CONTAINER} || echo "No container running"'
+                sh 'docker run -d --restart always --name ${DOCKER_CONTAINER} -p 7000:7000 $DOCKER_USERNAME/$DOCKER_IMAGE:latest'
             }
         }
     }

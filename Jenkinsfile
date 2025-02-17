@@ -32,6 +32,7 @@ pipeline{
         steps {
             script {
                 sh 'docker pull $DOCKER_USERNAME/$DOCKER_IMAGE:latest'
+                sh 'docker ps -q -f name=${DOCKER_CONTAINER} | grep -q . && docker rm -f ${DOCKER_CONTAINER} || echo "No container running"'
             }
         }
     }

@@ -32,7 +32,7 @@ pipeline{
             script {
                 // Conectarse al servidor remoto mediante SSH
                 sh """
-                sh 'docker pull $DOCKER_USERNAME/$DOCKER_IMAGE:latest'
+                sh 'docker pull lnavarrete14/img-demo:latest'
                 sh 'docker ps -q -f name=${DOCKER_CONTAINER} | grep -q . && docker rm -f ${DOCKER_CONTAINER} || echo "No container running"'
                 
                 // Iniciar el contenedor con la nueva imagen

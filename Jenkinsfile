@@ -9,7 +9,7 @@ pipeline{
   }
   
   stages{
-    stage('Build'){
+    stage('Builds'){
       steps {
                 script {
                     // Construir la imagen de Docker
